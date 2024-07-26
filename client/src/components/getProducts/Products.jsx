@@ -3,7 +3,9 @@ import "./user.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-import { Box, Button } from "@mui/material";
+// import Box from "@mui/material/Box";
+// import Button from "@mui/material/Button";
+import { FaPen, FaTrash } from "react-icons/fa";
 
 const Products = () => {
   const [users, setUsers] = useState([]);
@@ -34,7 +36,6 @@ const Products = () => {
         console.log(error);
       });
   };
-
   return (
     <div className="userTable">
       <Toaster />
@@ -50,47 +51,44 @@ const Products = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user, index) => {
-            return (
-              <tr id={user._id}>
-                <td>{index + 1}</td>
-                <td>{user.name}</td>
-                <td>{user.quantity} </td>
-                <td>{user.price}</td>
-                <td className="actionButtons">
-                  <Box >
-
-                    <Link
-                      to={`/update/${user._id}`}
-                      className="btn btn-info"
-                      style={{ textDecoration: 'none', color: 'inherit' }}
-                    >
-                      <Button variant="contained" color="info" sx={{ minWidth: "100px" }}>
-                        <i className="fa-solid fa-pen-to-square"></i>
-                      </Button>
-                    </Link>
-
-                    <button
-                      onClick={() => deleteProduct(user._id)}
-                      type="button"
-                      class="btn btn-danger"
-                    >
-                      <i class="fa-solid fa-trash"></i>
+          {users.map((user, index) => (
+            <tr key={user._id}>
+              <td>{index + 1}</td>
+              <td>{user.name}</td>
+              <td>{user.quantity}</td>
+              <td>{user.price}</td>
+              <td className="actionButtons">
+                <div className="actionButtonsContainer">
+                  <Link
+                    to={`/update/${user._id}`}
+                    className="btn btn-info"
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  >
+                    <button className="btn btn-info">
+                      <FaPen />
                     </button>
-                  </Box>
-                </td>
-              </tr>
-            );
-          })}
+                  </Link>
+                  <button
+                    onClick={() => deleteProduct(user._id)}
+                    type="button"
+                    className="btn btn-danger"
+                  >
+                    <FaTrash />
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
-      <Box sx={{ mt: 3 }}>
-        <Link to={'/enter-products'} >
+      <div className="enterProductsLink" style={{ marginTop: '20px' }}>
+        <Link to="/enter-products">
           To Enter Products Click Here ...
         </Link>
-      </Box>
+      </div>
     </div>
   );
 };
+
 
 export default Products;
