@@ -35,3 +35,16 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+/* Mobile styles */
+@media (max-width: 768px) {
+
+    .aboutContainer h1 {
+        text-align: center;
+        font-size: 27px;
+    }
+
+    /* .aboutContainer ul li {
+        margin-bottom: 20px;
+    } */
+}

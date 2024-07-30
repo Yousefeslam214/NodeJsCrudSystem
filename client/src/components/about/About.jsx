@@ -5,6 +5,7 @@ const About = () => {
     return (
         <div className="aboutContainer">
             <h1>About Our Warehouse Management System</h1>
+        {/* style to mobile text-align: center; font-size: 27px; */}
             <p>
                 Welcome to our Warehouse Management System (WMS), a powerful tool designed to help businesses efficiently manage their inventory and streamline their operations.
             </p>
