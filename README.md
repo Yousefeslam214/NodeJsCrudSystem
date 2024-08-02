@@ -23,7 +23,8 @@
 cd my-fullstack-project</code></pre>
 </li>
 <li>Install the dependencies for both backend and frontend:
-<pre><code># Install backend dependencies
+<pre><code>
+# Install backend dependencies
 cd backend
 npm install
 
