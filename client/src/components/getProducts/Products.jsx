@@ -5,18 +5,21 @@ import { Link } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { FaPen, FaTrash } from "react-icons/fa";
 
-
 const Products = () => {
-  // let apiUrl = "https://server-ms0pyripx-yousefeslam214s-projects.vercel.app/"
+  const apiUrl = "https://server-seven-khaki.vercel.app";
+
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true); // State for loading
   const [error, setError] = useState(null); // State for error
-  // console.log(process.env);
+
   axios.defaults.withCredentials = true;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://server-seven-khaki.vercel.app/api/products`);
+        const response = await axios.get(`${apiUrl}/api/products`, {
+          withCredentials: true,
+        });
         setUsers(response.data);
         setLoading(false); // Set loading to false after data is fetched
       } catch (error) {
@@ -29,16 +32,16 @@ const Products = () => {
   }, []);
 
   const deleteProduct = async (productId) => {
-    await axios
-      .delete(`${apiUrl}/api/products/${productId}`)
-      .then((response) => {
-        setUsers((prevUser) => prevUser.filter((user) => user._id !== productId));
-        toast.success(response.data.message, { position: "top-right" });
-      })
-      .catch((error) => {
-        console.log(error);
-        toast.error("Error while deleting product. Please try again later.", { position: "top-right" });
+    try {
+      const response = await axios.delete(`${apiUrl}/api/products/${productId}`, {
+        withCredentials: true,
       });
+      setUsers((prevUser) => prevUser.filter((user) => user._id !== productId));
+      toast.success(response.data.message, { position: "top-right" });
+    } catch (error) {
+      console.log(error);
+      toast.error("Error while deleting product. Please try again later.", { position: "top-right" });
+    }
   };
 
   return (
