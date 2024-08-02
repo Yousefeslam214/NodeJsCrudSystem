@@ -43,8 +43,8 @@ URL=your_mongodb_connection_string</code></pre>
             <pre><code>cd backend
 npm start</code></pre>
 </li>
-<li>Start the frontend development server:
-<pre><code>cd ../frontend
+    <li>Start the frontend development server:
+        <pre><code>cd ../frontend
 npm start</code></pre>
 </li>
 <li>Open your browser and navigate to <code>http://localhost:3000</code>.</li>
