@@ -4,16 +4,29 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { FaPen, FaTrash } from "react-icons/fa";
+// import 'dotenv/config'
+// require('dotenv').config();
+
+// console.log(import.meta.env) // remove this after you've confirmed it is working
+// const apiUrl = import.meta.env.VITE_API_URL;
+// 
+
+// let apiUrl = JSON.stringify(import.meta.env.REACT_APP_API_URL)
 
 const Products = () => {
+  // let apiUrl = JSON.stringify(process.env.REACT_APP_API_URL);
+  // let apiUrl = import.meta.env
+  // let apiUrl = import.meta.env.REACT_APP_API_URL
+  let apiUrl = "https://server-ms0pyripx-yousefeslam214s-projects.vercel.app/"
+  // console.log(process.env)
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true); // State for loading
   const [error, setError] = useState(null); // State for error
-
+  // console.log(process.env);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5002/api/products");
+        const response = await axios.get(`https://server-hm6modu0o-yousefeslam214s-projects.vercel.app/api/products`);
         setUsers(response.data);
         setLoading(false); // Set loading to false after data is fetched
       } catch (error) {
@@ -27,7 +40,7 @@ const Products = () => {
 
   const deleteProduct = async (productId) => {
     await axios
-      .delete(`http://localhost:5002/api/products/${productId}`)
+      .delete(`${apiUrl}/api/products/${productId}`)
       .then((response) => {
         setUsers((prevUser) => prevUser.filter((user) => user._id !== productId));
         toast.success(response.data.message, { position: "top-right" });

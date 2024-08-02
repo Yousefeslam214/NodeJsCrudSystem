@@ -18,7 +18,7 @@ const EnterProducts = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:5002/api/products");
+                const response = await axios.get("https://server-rg1syeeu0-yousefeslam214s-projects.vercel.app/api/products");
                 setUsers(response.data);
             } catch (error) {
                 console.log("Error while fetching data", error);
