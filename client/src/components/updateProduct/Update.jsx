@@ -10,65 +10,67 @@ import FormModel from "../form/FormModel";
 
 
 const Update = () => {
- const initialUser = {
-  name: "",
-  quantity: "",
-  price: "",
- };
- const [user, setUser] = useState(initialUser);
- const navigate = useNavigate();
- const { id } = useParams();
- const inputHandler = (e) => {
-  const { name, value } = e.target;
-  setUser({ ...user, [name]: value });
- };
+  const apiUrl = "https://server-seven-khaki.vercel.app";
 
- useEffect(() => {
-  axios
-   .get(`http://localhost:5002/api/products/${id}`)
-   .then((response) => {
-    setUser(response.data);
-   })
-   .catch((error) => {
-    console.log(error);
-   });
- }, [id]);
+  const initialUser = {
+    name: "",
+    quantity: "",
+    price: "",
+  };
+  const [user, setUser] = useState(initialUser);
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const inputHandler = (e) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
+  };
 
- // const submitForm = async (e) => {
- //  e.preventDefault();
- //  try {
- //   const response = await axios.put(`http://localhost:5002/api/products/${id}`, user);
- //   toast.success(response.data.message, { position: "top-right" });
- //   navigate("/products");
- //  } catch (error) {
- //   console.log("Error updating product", error);
- //  }
- // };
+  useEffect(() => {
+    axios
+      .get(`${apiUrl}/api/products/${id}`)
+      .then((response) => {
+        setUser(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [id]);
 
- const updateProduct = async () => {
-  try {
+  // const submitForm = async (e) => {
+  //  e.preventDefault();
+  //  try {
+  //   const response = await axios.put(`http://localhost:5002/api/products/${id}`, user);
+  //   toast.success(response.data.message, { position: "top-right" });
+  //   navigate("/products");
+  //  } catch (error) {
+  //   console.log("Error updating product", error);
+  //  }
+  // };
 
-   const response = await axios.put(`http://localhost:5002/api/products/${id}`, user);
+  const updateProduct = async () => {
+    try {
 
-   // setUsers((prevUsers) => [...prevUsers, response.data]);
-   toast.success('Product Updated successfully!', { position: 'top-right' });
+      const response = await axios.put(`${apiUrl}/api/products/${id}`, user);
 
-   setTimeout(() => {
-    navigate("/products");
-   }, 500);
-  } catch (error) {
-   console.log('Error creating product', error);
-   toast.error('Failed to create product', { position: 'top-right' });
-  }
- };
+      // setUsers((prevUsers) => [...prevUsers, response.data]);
+      toast.success('Product Updated successfully!', { position: 'top-right' });
 
- return (
-  <div className="updateProduct">
-   {/* <Link to="/" className="btn btn-secondary">
+      setTimeout(() => {
+        navigate("/products");
+      }, 500);
+    } catch (error) {
+      console.log('Error creating product', error);
+      toast.error('Failed to create product', { position: 'top-right' });
+    }
+  };
+
+  return (
+    <div className="updateProduct">
+      {/* <Link to="/" className="btn btn-secondary">
     <i className="fa-solid fa-backward"></i> Back
    </Link> */}
 
-   {/* <form
+      {/* <form
     className="updateProductForm"
     onSubmit={submitForm}
    >
@@ -115,22 +117,22 @@ const Update = () => {
      </button>
     </div>
    </form> */}
-   <div className="userTable">
-    <Toaster />
+      <div className="userTable">
+        <Toaster />
 
-    <h2>Update Product</h2>
-    <FormModel
-     productName={user.name}
-     setProductName={(name) => setUser((prevUser) => ({ ...prevUser, name }))}
-     productQuantity={user.quantity}
-     setProductQuantity={(quantity) => setUser((prevUser) => ({ ...prevUser, quantity }))}
-     productPrice={user.price}
-     setProductPrice={(price) => setUser((prevUser) => ({ ...prevUser, price }))}
-     createProduct={updateProduct}
-    />
-   </div>
-  </div>
- );
+        <h2>Update Product</h2>
+        <FormModel
+          productName={user.name}
+          setProductName={(name) => setUser((prevUser) => ({ ...prevUser, name }))}
+          productQuantity={user.quantity}
+          setProductQuantity={(quantity) => setUser((prevUser) => ({ ...prevUser, quantity }))}
+          productPrice={user.price}
+          setProductPrice={(price) => setUser((prevUser) => ({ ...prevUser, price }))}
+          createProduct={updateProduct}
+        />
+      </div>
+    </div>
+  );
 };
 
 export default Update;

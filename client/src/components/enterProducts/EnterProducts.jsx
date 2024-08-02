@@ -8,6 +8,9 @@ import { useNavigate } from "react-router-dom";
 
 
 const EnterProducts = () => {
+    const apiUrl = "https://server-seven-khaki.vercel.app";
+
+
     const navigate = useNavigate();
 
     const [users, setUsers] = useState([]);
@@ -18,7 +21,7 @@ const EnterProducts = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("https://server-rg1syeeu0-yousefeslam214s-projects.vercel.app/api/products");
+                const response = await axios.get(`${apiUrl}/api/products`);
                 setUsers(response.data);
             } catch (error) {
                 console.log("Error while fetching data", error);
@@ -35,7 +38,7 @@ const EnterProducts = () => {
                 quantity: productQuantity,
                 price: productPrice,
             };
-            const response = await axios.post('http://localhost:5002/api/products', productData);
+            const response = await axios.post(`${apiUrl}/api/products`, productData);
             setUsers((prevUsers) => [...prevUsers, response.data]);
             toast.success('Product created successfully!', { position: 'top-right' });
             setTimeout(() => {
